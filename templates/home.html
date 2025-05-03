@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mb-4">Последние посты</h1>
+    {% for post in posts %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                {% if post.image_path %}
+                    <img src="{{ url_for('static', filename=post.image_path) }}" class="img-fluid mb-3" alt="Изображение поста" style="max-width: 100%; height: auto;">
+                    <div class="text-muted small">
+                        <a href="{{ url_for('uploaded_file', filename=post.image_path.split('/')[-1]) }}" target="_blank">Открыть изображение</a>
+                    </div>
+                {% endif %}
+                <p class="card-text">
+                    <small class="text-muted">
+                        Автор: {{ post.author.username }} | 
+                        Опубликовано: {{ post.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </small>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %} 

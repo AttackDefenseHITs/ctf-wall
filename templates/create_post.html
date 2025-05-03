@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Создать новый пост</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Заголовок</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Содержание</label>
+                            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Изображение</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label for="secret_note" class="form-label">Секретная заметка (опционально)</label>
+                            <textarea class="form-control" id="secret_note" name="secret_note" rows="3" 
+                                    placeholder="Эта заметка будет видна только вам и администраторам"></textarea>
+                            <small class="text-muted">Заметка будет привязана к посту, но видна только вам и администраторам</small>
+                        </div>
+                        <input type="hidden" name="hidden_data" value="">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Создать пост</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mb-4">Секретные заметки пользователей</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Содержание</th>
+                    <th>Пользователь</th>
+                    <th>Зашифровано</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                <tr>
+                    <td>{{ note.id }}</td>
+                    <td>{{ note.content }}</td>
+                    <td>{{ note.owner.username }}</td>
+                    <td>{{ "Да" if note.is_encrypted else "Нет" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %} 
