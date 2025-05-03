@@ -39,7 +39,7 @@ ENV/
 *.sqlite3
 
 # Uploads and media
-static/uploads/
+app/static/uploads/
 media/
 
 # Logs
