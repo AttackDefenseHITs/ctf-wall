@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  wall_forum:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wall_forum
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - uploads_data:/app/app/static/uploads
+      - db_data:/app/instance
+      - ./app:/app/app:ro
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+      - SECRET_KEY=change_me_in_production
+      - UPLOAD_FOLDER=/app/app/static/uploads
+      - SQLALCHEMY_DATABASE_URI=sqlite:///forum.db
+
+volumes:
+  uploads_data:
+    name: wall_forum_uploads
+  db_data:
+    name: wall_forum_db
+
+networks:
+  default:
+    name: wall_forum_network
+    driver: bridge

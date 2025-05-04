@@ -96,3 +96,18 @@ def get_note(note_id):
         'user_id': note.user_id,
         'is_encrypted': note.is_encrypted
     })
+
+
+@main.route('/api/notes/', methods=['GET'])
+@login_required
+def get_all_user_notes():
+    notes = SecretNote.query.filter_by(user_id=current_user.id).all()
+    return jsonify([
+        {
+            'id': note.id,
+            'content': note.content,
+            'user_id': note.user_id,
+            'is_encrypted': note.is_encrypted
+        }
+        for note in notes
+    ])
