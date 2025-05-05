@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt \
-    && pip install gunicorn
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install gunicorn
 
 COPY . .
 
@@ -19,3 +19,4 @@ RUN mkdir -p /app/app/static/uploads && chmod 777 /app/app/static/uploads
 EXPOSE 5000
 
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:app"]
+
