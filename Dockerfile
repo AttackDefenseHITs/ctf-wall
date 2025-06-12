@@ -2,17 +2,15 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg curl ca-certificates && \
-    curl -fsSL https://ftp-master.debian.org/keys/archive-key-12.asc \
-    | gpg --dearmor -o /etc/apt/trusted.gpg.d/debian-archive.gpg && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    gcc libffi-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
-    && pip install --no-cache-dir gunicorn
+
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install gunicorn
 
 COPY . .
 
