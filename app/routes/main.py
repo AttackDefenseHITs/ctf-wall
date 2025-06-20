@@ -89,8 +89,6 @@ def admin_notes():
 @login_required
 def get_note(note_id):
     note = SecretNote.query.get_or_404(note_id)
-    if not current_user.is_admin and note.user_id != current_user.id:
-        return jsonify({'error': 'Доступ запрещен'}), 403
     return jsonify({
         'content': note.content,
         'user_id': note.user_id,
